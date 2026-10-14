@@ -1,0 +1,11 @@
+origem/*.db
+camadas/*.db
+__pycache__/
+*.pyc
+.env
+# Artefatos locais de execução e restauração
+resiliencia/backups/
+*.restore.tmp
+*.db-journal
+*.db-wal
+*.db-shm

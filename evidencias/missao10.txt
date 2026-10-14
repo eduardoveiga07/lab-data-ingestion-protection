@@ -1,0 +1,23 @@
+[OK] artefato de arquitetura presente: arquitetura/pipeline.dot
+[OK] artefato de arquitetura presente: arquitetura/pipeline.svg
+[OK] artefato de arquitetura presente: arquitetura/pipeline.png
+[OK] artefato de arquitetura presente: arquitetura/vida-do-dado.dot
+[OK] artefato de arquitetura presente: arquitetura/vida-do-dado.svg
+[OK] artefato de arquitetura presente: arquitetura/vida-do-dado.png
+[OK] README aponta para as duas visões
+[OK] diagrama estrutural registra chave, acesso, classe e cópias
+[OK] diagrama de vida cobre cadastro, eliminação e restauração
+[OK] README registra todas as missões como concluídas
+[OK] README documenta execução, números finais e RTO
+[OK] evidência da Missão 0
+[OK] evidência da Missão 1
+[OK] evidência da Missão 2
+[OK] evidência da Missão 3
+[OK] evidência da Missão 4
+[OK] evidência da Missão 5
+[OK] evidência da Missão 6
+[OK] evidência da Missão 7
+[OK] evidência da Missão 8
+[OK] evidência da Missão 9
+[OK] evidência de resiliência registra RTO observado
+RESULTADO: tudo certo

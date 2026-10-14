@@ -1,0 +1,14 @@
+[OK] Silver generaliza nascimento e não guarda data exata: obtido ['cliente_ps', 'faixa_etaria', 'cidade']; esperado ['cliente_ps', 'faixa_etaria', 'cidade']
+[OK] distribuição das faixas etárias: obtido {'25-34': 3, '35-44': 2, '45-54': 1}; esperado {'25-34': 3, '35-44': 2, '45-54': 1}
+[OK] clientes na Silver: obtido 6; esperado 6
+[OK] pedidos validados na Silver: obtido 11; esperado 11
+[OK] receita paga na Silver (centavos): obtido 84490; esperado 84490
+[OK] quatro combinações cidade + faixa etária têm uma pessoa: obtido 4; esperado 4
+[OK] Santos: 3 clientes e R$ 545,00: obtido (3, 54500, 0); esperado (3, 54500, 0)
+[OK] Sorocaba: 2 clientes e R$ 95,90: obtido (2, 9590, 0); esperado (2, 9590, 0)
+[OK] Campinas suprimida: obtido (None, None, 1); esperado (None, None, 1)
+[OK] total geral mantém receita da cidade suprimida e pedido 106: obtido 84490; esperado 84490
+[OK] com K=3, Sorocaba e Campinas seriam suprimidas: obtido 2; esperado 2
+Nota: pedido 106 continua no total geral, mas não é atribuído a uma cidade porque o cadastro do cliente 5 foi excluído.
+A visão de consumo expõe cidade, número de clientes e receita apenas quando o grupo atende K=2; nos grupos suprimidos, contagem e receita ficam NULL.
+RESULTADO: tudo certo

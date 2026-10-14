@@ -1,0 +1,19 @@
+1) Primeira execução
+[OK] bronze (clientes, pedidos, eventos): obtido (6, 8, 8), esperado (6, 8, 8)
+2) Segunda execução, sem mudança na origem
+[OK] linhas lidas: obtido 0, esperado 0
+[OK] bronze (clientes, pedidos, eventos): obtido (6, 8, 8), esperado (6, 8, 8)
+3) Depois das mudanças do dia 2
+[OK] linhas lidas: obtido 4, esperado 4
+[OK] lidas por tabela: obtido {'clientes': 2, 'pedidos': 2, 'navegacao': 0}, esperado {'clientes': 2, 'pedidos': 2, 'navegacao': 0}
+4) Estado da camada bronze
+[OK] clientes: obtido 7, esperado 7
+[OK] pedidos: obtido 9, esperado 9
+[OK] receita paga: obtido R$ 750,90, esperado R$ 750,90
+5) A cliente 5 foi excluída na origem
+[OK] cliente 5 na origem: obtido 0, esperado 0
+[OK] cliente 5 na bronze: obtido 1, esperado 1
+    (anotem: é o ponto de partida da Missão 2: a marca-d'água não vê exclusão)
+Extra) Idempotência: apagar as marcas-d'água e reprocessar tudo
+[OK] totais iguais depois de reprocessar tudo: obtido (7, 9, 8, 75090), esperado (7, 9, 8, 75090)
+RESULTADO: tudo certo

@@ -1,0 +1,14 @@
+1) Acordo de governança e regra como código
+[OK] conjuntos no acordo: obtido 3; esperado 3
+[OK] pipeline barra conjunto pessoal sem retenção: obtido True; esperado True
+2) Catálogo gerado dos contratos e acordo
+[OK] catálogo inclui os três conjuntos: obtido True; esperado True
+[OK] catálogo inclui dono e frescor: obtido True; esperado True
+[OK] alteração no contrato aparece ao regenerar catálogo: obtido True; esperado True
+3) Varredura de padrões pessoais na Bronze
+[OK] observações com dado pessoal não estruturado: obtido [104, 106]; esperado [104, 106]
+[OK] eventos de navegação com IP: obtido 8; esperado 8
+[OK] varredura cobre e-mail, telefone, CPF e IP: obtido True; esperado True
+Localizações inesperadas identificadas: pedidos.observacao (pedidos 104 e 106) e navegacao.ip (8 eventos).
+O varredor registra tabela, coluna, linha e tipo, sem despejar valores pessoais no relatório.
+RESULTADO: tudo certo

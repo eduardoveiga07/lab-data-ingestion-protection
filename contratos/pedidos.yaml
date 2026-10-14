@@ -1,0 +1,42 @@
+conjunto: pedidos
+descricao: Pedidos e valores transacionais da loja online.
+versao: 1
+dono: Time de Pedidos e Pagamentos
+classe: pessoal
+frescor: até 24 horas depois da mudança na origem
+campos:
+  - nome: id
+    descricao: Identificador do pedido.
+    classe: interno
+    tipo: inteiro
+    obrigatorio: true
+    unico: true
+  - nome: cliente_id
+    descricao: Referência ao cliente; permite associação indireta a uma pessoa.
+    finalidade: Junção analítica por pseudônimo na Silver; ID original não é exposto.
+    classe: pessoal
+    tipo: inteiro
+    obrigatorio: true
+  - nome: valor_centavos
+    descricao: Valor do pedido em centavos.
+    classe: interno
+    tipo: inteiro
+    obrigatorio: true
+    minimo: 0
+  - nome: status
+    descricao: Estado operacional do pedido.
+    classe: interno
+    tipo: texto
+    obrigatorio: true
+    dominio: [pendente, pago, cancelado]
+  - nome: criado_em
+    descricao: Data e hora de criação do pedido.
+    classe: interno
+    tipo: data_hora
+    obrigatorio: true
+    maximo: momento da carga
+  - nome: observacao
+    descricao: Texto livre do atendimento; pode conter dados pessoais não estruturados.
+    classe: pessoal
+    tipo: texto
+    obrigatorio: false

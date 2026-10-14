@@ -1,0 +1,29 @@
+0) Ponto de partida: origem e bronze no estado do dia 1
+[OK] bronze (clientes, pedidos, receita paga): obtido (6, 8, 65500), esperado (6, 8, 65500)
+[OK] log vazio depois de ligar a captura: obtido 0, esperado 0
+1) O log da origem
+[OK] eventos registrados: obtido 5, esperado 5
+[OK] ordem (tabela, operação, chave): obtido [('pedidos', 'UPDATE', 105), ('clientes', 'UPDATE', 3), ('clientes', 'INSERT', 7), ('pedidos', 'INSERT', 109), ('clientes', 'DELETE', 5)], esperado [('pedidos', 'UPDATE', 105), ('clientes', 'UPDATE', 3), ('clientes', 'INSERT', 7), ('pedidos', 'INSERT', 109), ('clientes', 'DELETE', 5)]
+[OK] sequências crescentes sem buraco: obtido [1, 2, 3, 4, 5], esperado [1, 2, 3, 4, 5]
+    conteúdo do log:
+    1 | pedidos  | UPDATE | chave 105 | {"id":105,"cliente_id":4,"valor_centavos":3990,"status":"pago","criado_em":"2026-10-01T12:00:00","atualizado_em":"2026-10-02T08:10:00","observacao":null}
+    2 | clientes | UPDATE | chave 3   | {"id":3,"nome":"Carla Nunes","email":"carla.n@example.com","cpf":"333.333.333-33","nascimento":"1998-11-02","cidade":"Santos","atualizado_em":"2026-10-02T08:20:00"}
+    3 | clientes | INSERT | chave 7   | {"id":7,"nome":"Gabi Rocha","email":"gabi.rocha@example.com","cpf":"777.777.777-77","nascimento":"1996-02-25","cidade":"Sorocaba","atualizado_em":"2026-10-02T08:30:00"}
+    4 | pedidos  | INSERT | chave 109 | {"id":109,"cliente_id":7,"valor_centavos":5600,"status":"pago","criado_em":"2026-10-02T08:40:00","atualizado_em":"2026-10-02T08:40:00","observacao":null}
+    5 | clientes | DELETE | chave 5   | None
+2) Sincronizar a bronze com o log
+[OK] eventos aplicados: obtido 5, esperado 5
+[OK] offset salvo: obtido 5, esperado 5
+[OK] clientes na bronze (sem a cliente 5): obtido 6, esperado 6
+[OK] cliente 5 na bronze: obtido 0, esperado 0
+[OK] pedidos na bronze: obtido 9, esperado 9
+[OK] e-mail do cliente 3: obtido carla.n@example.com, esperado carla.n@example.com
+[OK] pedido 106 continua lá: obtido 1, esperado 1
+[OK] receita paga: obtido R$ 750,90, esperado R$ 750,90
+3) Retomada e reaplicação
+[OK] segunda sincronização aplica: obtido 0, esperado 0
+[OK] reaplicando desde o primeiro evento, eventos reaplicados: obtido 5, esperado 5
+[OK] mesmos números: obtido (6, 9, 75090), esperado (6, 9, 75090)
+[OK] mesmo conteúdo (impressão das tabelas): obtido 2a26af9029a8, esperado 2a26af9029a8
+[OK] offset não recuou: obtido 5, esperado 5
+RESULTADO: tudo certo

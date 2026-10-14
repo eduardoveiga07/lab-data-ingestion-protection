@@ -1,0 +1,42 @@
+digraph VidaDoDado {
+  graph [rankdir=TB, bgcolor="white", pad="0.3", nodesep="0.38", ranksep="0.48", fontname="Arial", labelloc="t", label="Vida de um dado pessoal — do cadastro à eliminação", fontsize=20];
+  node [shape=box, style="rounded,filled", fillcolor="#F3F6FA", color="#506176", fontname="Arial", fontsize=10, margin="0.16,0.10"];
+  edge [color="#58677A", fontname="Arial", fontsize=9, arrowsize=0.75];
+
+  titular [label="Titular / cadastro sintético", fillcolor="#FDE8EF"];
+  origem [label="Origem SQLite\nclientes: nome, e-mail, CPF, nascimento, cidade", fillcolor="#FDE8EF"];
+  cdc [label="Log CDC / mudanças\npayload pessoal enquanto necessário", fillcolor="#FFF1D6"];
+  bronze [label="Bronze\ncópia bruta + lote + quarentena", fillcolor="#FFF1D6"];
+  silver [label="Silver\nHMAC cliente_ps + faixa etária + cidade\nsem CPF, nome, e-mail ou texto livre", fillcolor="#E1F4E8"];
+  gold [label="Gold\nreceita por cidade e métricas agregadas\nsupressão de grupos com K < 2", fillcolor="#E9E2FA"];
+  consumo [label="Consumo analítico autorizado\nsem identificadores diretos", shape=note, fillcolor="#F6F2FF"];
+  solicitacao [label="Solicitação de eliminação\ncliente de teste 5", fillcolor="#FDE8EF", color="#B80F45"];
+  ledger [label="Lista de eliminação externa ao snapshot\nchave derivada + data + moradas tratadas\nsem identificadores diretos", fillcolor="#FDE8EF", color="#B80F45"];
+  limpar [label="Expurgo / desvinculação\norigem, CDC, Bronze e Silver\nlimpar texto livre e eventos identificáveis", fillcolor="#FDE8EF", color="#B80F45"];
+  backup [label="Backups locais\nmanifesto SHA-256\nretenção/expiração documentada", fillcolor="#FFF1D6"];
+  restore [label="Restauração\nvalidar integridade → reaplicar ledger\n→ reconstruir Silver e Gold", fillcolor="#E1F4E8"];
+  final [label="Verificação pós-eliminação\ncliente não reaparece; pedido 106 fica pago\nmas sem vínculo pessoal", fillcolor="#E7F5EC", color="#0A7D3F"];
+
+  titular -> origem [label="cadastro"];
+  origem -> cdc [label="INSERT / UPDATE / DELETE", color="#0B6BCB"];
+  origem -> bronze [label="carga inicial / incremental", color="#0B6BCB"];
+  cdc -> bronze [label="replay ordenado", color="#0B6BCB"];
+  bronze -> silver [label="contrato + minimização + HMAC", color="#0A7D3F"];
+  silver -> gold [label="generalização + agregação", color="#0A7D3F"];
+  gold -> consumo;
+  origem -> backup [style=dashed, label="snapshot"];
+  bronze -> backup [style=dashed];
+  silver -> backup [style=dashed];
+  gold -> backup [style=dashed];
+  solicitacao -> ledger [label="registrar pedido"];
+  solicitacao -> limpar [label="executar esquecimento", color="#B80F45"];
+  ledger -> limpar [label="idempotência / trilha", color="#B80F45"];
+  limpar -> origem [label="apagar / desvincular", color="#B80F45", constraint=false];
+  limpar -> cdc [label="expurgar payload; manter tombstone mínimo", color="#B80F45", constraint=false];
+  limpar -> bronze [label="limpar cópias", color="#B80F45", constraint=false];
+  limpar -> silver [label="remover pseudônimo/eventos", color="#B80F45", constraint=false];
+  limpar -> final [label="validar ausência", color="#0A7D3F"];
+  backup -> restore [label="se recuperação necessária"];
+  ledger -> restore [label="replay obrigatório", color="#B80F45"];
+  restore -> final [label="não ressuscitar dados", color="#0A7D3F"];
+}

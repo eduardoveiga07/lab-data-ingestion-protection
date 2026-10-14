@@ -1,0 +1,34 @@
+conjunto: navegacao
+descricao: Eventos de navegação dos visitantes na loja online.
+versao: 1
+dono: Time de Produto Digital
+classe: pessoal
+frescor: até 24 horas depois da publicação do evento
+campos:
+  - nome: evento_id
+    descricao: Identificador do evento de navegação.
+    classe: interno
+    tipo: inteiro
+    obrigatorio: true
+    unico: true
+  - nome: cliente_id
+    descricao: Referência opcional ao cliente; vazio para visitante sem cadastro.
+    finalidade: Análises de navegação com pseudônimo na Silver; ID original não é exposto.
+    classe: pessoal
+    tipo: inteiro
+    obrigatorio: false
+  - nome: ip
+    descricao: Endereço IP do dispositivo; dado pessoal.
+    classe: pessoal
+    tipo: texto
+    obrigatorio: true
+  - nome: pagina
+    descricao: Página acessada; não identifica sozinha, mas ganha contexto ao ser associada.
+    classe: interno
+    tipo: texto
+    obrigatorio: true
+  - nome: quando
+    descricao: Data e hora do evento de navegação.
+    classe: interno
+    tipo: data_hora
+    obrigatorio: true

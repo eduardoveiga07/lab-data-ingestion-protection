@@ -1,0 +1,16 @@
+1) Contrato e preservação do lote bruto
+[OK] contrato lido do YAML: obtido 'pedidos v1'; esperado 'pedidos v1'
+[OK] lote bruto mantido na bronze: obtido 7; esperado 7
+[OK] linhas do lote: obtido 7; esperado 7
+2) Validação linha a linha
+[OK] aceitas: obtido 2; esperado 2
+[OK] quarentena: obtido 5; esperado 5
+[OK] um motivo por defeito: obtido ['valor abaixo do mínimo: valor_centavos < 0', 'campo obrigatório ausente: cliente_id', 'valor fora do domínio: status=enviado', 'chave repetida: id=110', 'data no futuro: criado_em > momento da carga']; esperado ['valor abaixo do mínimo: valor_centavos < 0', 'campo obrigatório ausente: cliente_id', 'valor fora do domínio: status=enviado', 'chave repetida: id=110', 'data no futuro: criado_em > momento da carga']
+3) Resultado na silver
+[OK] pedidos na silver: obtido 11; esperado 11
+[OK] ids da silver: obtido [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 115]; esperado [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 115]
+[OK] receita paga validada (centavos): obtido 84490; esperado 84490
+[OK] receita paga sem validação (centavos): obtido 93290; esperado 93290
+Receita validada: R$ 844,90
+Receita sem validação: R$ 932,90
+RESULTADO: tudo certo

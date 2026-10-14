@@ -1,0 +1,45 @@
+conjunto: clientes
+descricao: Cadastro e atributos dos clientes da loja online.
+versao: 1
+dono: Time de Cadastro e Identidade
+classe: pessoal
+frescor: até 24 horas depois da mudança na origem
+campos:
+  - nome: id
+    descricao: Identificador interno do cliente.
+    classe: interno
+    tipo: inteiro
+    obrigatorio: true
+    unico: true
+  - nome: nome
+    descricao: Nome informado no cadastro.
+    classe: pessoal
+    tipo: texto
+    obrigatorio: true
+  - nome: email
+    descricao: E-mail de contato.
+    classe: pessoal
+    tipo: texto
+    obrigatorio: true
+  - nome: cpf
+    descricao: CPF do titular.
+    classe: pessoal
+    tipo: texto
+    obrigatorio: true
+  - nome: nascimento
+    descricao: Data de nascimento; quase-identificador. Na Silver, generalizado em faixa etária.
+    finalidade: Análise agregada por faixa etária; a data exata não é exposta ao consumo.
+    classe: pessoal
+    tipo: data
+    obrigatorio: false
+  - nome: cidade
+    descricao: Cidade de residência; pode atuar como quase-identificador.
+    finalidade: Agregação de receita por cidade, com supressão de grupos abaixo de K=2.
+    classe: pessoal
+    tipo: texto
+    obrigatorio: false
+  - nome: atualizado_em
+    descricao: Momento da última atualização da linha.
+    classe: interno
+    tipo: data_hora
+    obrigatorio: true

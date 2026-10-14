@@ -1,0 +1,29 @@
+[OK] segunda execução é reconhecida como repetição: obtido True; esperado True
+[OK] origem/loja.db:clientes contém 6 linhas: obtido 6; esperado 6
+[OK] origem/loja.db:pedidos contém 9 linhas: obtido 9; esperado 9
+[OK] origem/loja.db:navegacao contém 6 linhas: obtido 6; esperado 6
+[OK] origem/loja.db:log_navegacao contém 6 linhas: obtido 6; esperado 6
+[OK] camadas/bronze.db:clientes contém 6 linhas: obtido 6; esperado 6
+[OK] camadas/bronze.db:pedidos contém 9 linhas: obtido 9; esperado 9
+[OK] camadas/bronze.db:navegacao contém 6 linhas: obtido 6; esperado 6
+[OK] camadas/silver.db:clientes contém 6 linhas: obtido 6; esperado 6
+[OK] camadas/silver.db:pedidos contém 11 linhas: obtido 11; esperado 11
+[OK] camadas/silver.db:navegacao contém 6 linhas: obtido 6; esperado 6
+[OK] pedido 106 continua pago e sem cliente/observação: obtido (None, 15900, 'pago', None); esperado (None, 15900, 'pago', None)
+[OK] CDC conserva tombstone mínimo de cliente 5: obtido ('DELETE', None); esperado ('DELETE', None)
+[OK] nenhum evento de navegação do cliente 5 no log: obtido 0; esperado 0
+[OK] agregado por cliente não guarda chave 5: obtido 0; esperado 0
+[OK] agregado de visitas soma seis eventos: obtido 6; esperado 6
+[OK] lista de eliminação contém um registro: obtido 1; esperado 1
+[OK] receita Gold não muda: obtido 84490; esperado 84490
+[OK] receita paga permanece R$ 844,90: obtido 84490; esperado 84490
+[OK] visão por cidade permanece igual ao baseline: obtido [('Campinas', None, None, 1), ('Santos', 3, 54500, 0), ('Sorocaba', 2, 9590, 0)]; esperado [('Campinas', None, None, 1), ('Santos', 3, 54500, 0), ('Sorocaba', 2, 9590, 0)]
+[OK] busca de dados do titular em origem/loja.db sem achados: obtido []; esperado []
+[OK] busca de dados do titular em camadas/bronze.db sem achados: obtido []; esperado []
+[OK] busca de dados do titular em camadas/silver.db sem achados: obtido []; esperado []
+[OK] arquivo de evidência tem um pedido: obtido 1; esperado 1
+[OK] evidência não inclui identificadores diretos: obtido False; esperado False
+[OK] inventário cobre pelo menos seis moradas: obtido True; esperado True
+Decisão: o pedido 106 permanece na receita geral, mas foi desvinculado do titular e teve o texto livre limpo.
+Limite documentado: cópias imutáveis expiram conforme retenção e recebem a lista de eliminação antes de voltar ao serviço.
+RESULTADO: tudo certo

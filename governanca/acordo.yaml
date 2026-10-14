@@ -1,0 +1,17 @@
+# Decisões do grupo: donos são times, nunca pessoas.
+conjuntos:
+  - nome: clientes
+    dono: Time de Cadastro e Identidade
+    classe: pessoal
+    retencao: Enquanto a relação estiver ativa; revisar e eliminar até 5 anos após encerramento quando não houver obrigação ou disputa pendente.
+    acesso: Cadastro administra; Engenharia de Dados acessa por serviço; aprovação do dono para acesso humano; leituras administrativas auditadas.
+  - nome: pedidos
+    dono: Time de Pedidos e Pagamentos
+    classe: pessoal
+    retencao: 5 anos após encerramento do exercício como política operacional inicial para suportar obrigações fiscais; confirmar com Jurídico/Fiscal antes de produção.
+    acesso: Serviço de pedidos e Financeiro por função; Engenharia de Dados com acesso mínimo; consultas humanas auditadas.
+  - nome: navegacao
+    dono: Time de Produto Digital
+    classe: pessoal
+    retencao: 30 dias para análise operacional; depois agregar ou eliminar eventos identificáveis.
+    acesso: Produto recebe métricas agregadas; acesso a eventos brutos apenas por serviço autorizado e com trilha de leitura.

@@ -1,0 +1,19 @@
+[OK] snapshot inclui os quatro bancos: obtido 4; esperado 4
+[OK] manifesto registra os quatro bancos: obtido 4; esperado 4
+[OK] integridade SHA-256 antes da restauração: obtido True; esperado True
+[OK] eliminação remove dados de navegação na origem: obtido 0; esperado 0
+[OK] lista de eliminação existe fora do snapshot: obtido True; esperado True
+[OK] uma eliminação foi reaplicada após restore: obtido 1; esperado 1
+[OK] Silver e Gold reconstruídas: obtido True; esperado True
+[OK] sem dados identificáveis após restore em origem/loja.db: obtido []; esperado []
+[OK] sem dados identificáveis após restore em camadas/bronze.db: obtido []; esperado []
+[OK] sem dados identificáveis após restore em camadas/silver.db: obtido []; esperado []
+[OK] pedido 106 permanece pago e desvinculado: obtido (None, 15900, 'pago', None); esperado (None, 15900, 'pago', None)
+[OK] total Gold preserva R$ 844,90: obtido 84490; esperado 84490
+[OK] cliente eliminado não reaparece na Silver: obtido 0; esperado 0
+[OK] ledger de eliminação foi reconstruído na Bronze: obtido 1; esperado 1
+[OK] snapshot com hash divergente é bloqueado: obtido True; esperado True
+RTO observado no ensaio (restauração + replay + reconstrução): 0.009 s; medição local, não SLA de produção.
+Decisão: a lista de eliminação fica fora do snapshot e é reaplicada antes de reconstruir Silver/Gold.
+Limite: o script valida integridade e restauração local; off-site, WORM/imutabilidade e cofre da chave exigem serviços externos.
+RESULTADO: tudo certo

@@ -1,0 +1,65 @@
+digraph Pipeline {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.42", ranksep="0.62", fontname="Arial", labelloc="t", label="Do dado à proteção — arquitetura do laboratório", fontsize=20];
+  node [shape=box, style="rounded,filled", fillcolor="#F3F6FA", color="#506176", fontname="Arial", fontsize=10, margin="0.14,0.09"];
+  edge [color="#58677A", fontname="Arial", fontsize=9, arrowsize=0.75];
+
+  subgraph cluster_ingestao {
+    label="Ingestão"; color="#AAB8C8"; style="rounded"; fontname="Arial";
+    csv [label="CSV sintéticos\nDia 1 / Dia 3"];
+    origem [label="Origem SQLite\nclientes · pedidos · navegação", fillcolor="#E5EEF9"];
+    cdc [label="CDC por gatilhos\ntabela mudancas"];
+    pub [label="Produtor de navegação\nlog append-only"];
+    leitores [label="Leitores independentes\nvisitas · bronze · por_cliente"];
+    csv -> origem [label="carga inicial"];
+    origem -> cdc [label="INSERT / UPDATE / DELETE"];
+    origem -> pub [label="eventos de navegação"];
+    pub -> leitores [label="log + offsets"];
+  }
+
+  subgraph cluster_lake {
+    label="Camadas SQLite"; color="#AAB8C8"; style="rounded"; fontname="Arial";
+    bronze [label="Bronze\ndados brutos + offsets + quarentena", fillcolor="#FFF1D6"];
+    silver [label="Silver\npseudônimos + campos minimizados", fillcolor="#E1F4E8"];
+    gold [label="Gold\nagregados com limiar K=2", fillcolor="#E9E2FA"];
+    cdc -> bronze [label="sincronização CDC"];
+    leitores -> bronze [label="eventos"];
+    bronze -> silver [label="contratos + HMAC"];
+    silver -> gold [label="agregação / supressão"];
+  }
+
+  subgraph cluster_controles {
+    label="Controles transversais"; color="#AAB8C8"; style="rounded,dashed"; fontname="Arial";
+    gov [label="Governança\ncontratos · catálogo · retenção"];
+    priv [label="Privacidade\ngeneralização · K-anonimato"];
+    del [label="Direito ao esquecimento\nledger externo à cópia"];
+    backup [label="Resiliência\nsnapshot + SHA-256"];
+    restore [label="Restauração\nvalidar → reaplicar exclusões\n→ reconstruir Silver / Gold"];
+    chave [label="CHAVE_PSEUDONIMO\nvariável de ambiente / cofre externo\nnunca no repositório", fillcolor="#FDE8EF", color="#B80F45"];
+    acesso [label="Acesso por função (modelo lógico)\nIngestão: origem / Bronze\nAnalista: Silver / Gold\nRestrito: chave e backups", fillcolor="#F3F6FA"];
+    copias [label="Cópias e retenção\nsnapshot local + manifesto SHA-256\noff-site / imutabilidade: não implementados", fillcolor="#FFF1D6"];
+    classes [label="Classificação das camadas\nOrigem / CDC / Bronze: pessoal\nSilver: pseudonimizada (ainda pessoal)\nGold: agregada, com supressão K=2", fillcolor="#F3F6FA"];
+    gov -> bronze [style=dashed, arrowhead=none];
+    gov -> silver [style=dashed, arrowhead=none];
+    priv -> gold [style=dashed, arrowhead=none];
+    del -> origem [style=dashed, label="eliminação"];
+    del -> bronze [style=dashed, label="limpeza / ledger"];
+    origem -> backup [style=dashed, label="snapshot"];
+    bronze -> backup [style=dashed];
+    silver -> backup [style=dashed];
+    gold -> backup [style=dashed];
+    backup -> restore [label="manifesto + bancos"];
+    del -> restore [label="replay da lista"];
+    restore -> silver [label="reconstrução", constraint=false];
+    restore -> gold [label="reconstrução", constraint=false];
+    chave -> silver [style=dashed, label="HMAC", color="#B80F45"];
+    acesso -> bronze [style=dashed, arrowhead=none];
+    acesso -> silver [style=dashed, arrowhead=none];
+    classes -> bronze [style=dashed, arrowhead=none];
+    classes -> silver [style=dashed, arrowhead=none];
+    classes -> gold [style=dashed, arrowhead=none];
+    copias -> backup [style=dashed, arrowhead=none];
+  }
+
+  consumo [label="Consumo analítico\nreceita por cidade / resumo", shape=note, fillcolor="#F6F2FF"];
+  gold -> consumo;
+}

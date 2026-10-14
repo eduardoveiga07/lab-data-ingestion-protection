@@ -1,0 +1,6 @@
+[OK] clientes: obtido 6, esperado 6
+[OK] pedidos: obtido 8, esperado 8
+[OK] eventos de navegação: obtido 8, esperado 8
+[OK] receita paga (centavos): obtido 65500, esperado 65500
+Receita paga: R$ 655,00
+RESULTADO: tudo certo

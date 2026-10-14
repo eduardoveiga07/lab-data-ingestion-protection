@@ -1,0 +1,16 @@
+[OK] tabelas Silver: obtido ['clientes', 'navegacao', 'pedidos']; esperado ['clientes', 'navegacao', 'pedidos']
+[OK] colunas clientes sem ID/CPF/nome/e-mail: obtido ['cliente_ps', 'faixa_etaria', 'cidade']; esperado ['cliente_ps', 'faixa_etaria', 'cidade']
+[OK] colunas pedidos sem cliente_id/observacao: obtido ['id', 'cliente_ps', 'valor_centavos', 'status', 'criado_em']; esperado ['id', 'cliente_ps', 'valor_centavos', 'status', 'criado_em']
+[OK] colunas navegação sem cliente_id/IP: obtido ['evento_id', 'cliente_ps', 'pagina', 'quando']; esperado ['evento_id', 'cliente_ps', 'pagina', 'quando']
+[OK] clientes na Silver (6 clientes, incluindo a inserção 7 e sem o cliente 5 excluído): obtido 6; esperado 6
+[OK] pedidos validados na Silver: obtido 11; esperado 11
+[OK] eventos de navegação: obtido 8; esperado 8
+[OK] pseudônimo HMAC determinístico: obtido 'aba3aefc745c8c141f5d3910378ab6d6f29da177613a6b91496e8325b355206a'; esperado 'aba3aefc745c8c141f5d3910378ab6d6f29da177613a6b91496e8325b355206a'
+[OK] pedido do cliente 1 usa pseudônimo igual: obtido 'aba3aefc745c8c141f5d3910378ab6d6f29da177613a6b91496e8325b355206a'; esperado 'aba3aefc745c8c141f5d3910378ab6d6f29da177613a6b91496e8325b355206a'
+[OK] navegação do cliente 1 usa pseudônimo igual: obtido 'aba3aefc745c8c141f5d3910378ab6d6f29da177613a6b91496e8325b355206a'; esperado 'aba3aefc745c8c141f5d3910378ab6d6f29da177613a6b91496e8325b355206a'
+[OK] visitante sem cadastro permanece NULL: obtido None; esperado None
+[OK] pseudônimo muda com outra chave: obtido True; esperado True
+[OK] receita paga preservada após projeção: obtido 84490; esperado 84490
+A matriz de proteção e as limitações locais estão documentadas em seguranca/matriz.md.
+A chave de teste é sintética e não é persistida em código ou banco.
+RESULTADO: tudo certo
